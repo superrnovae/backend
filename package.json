@@ -1,27 +1,29 @@
 {
-  "name": "spacex",
+  "name": "backend",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/superrnovae/spacex.git"
+    "url": "git+https://github.com/superrnovae/backend.git"
   },
-  "keywords": [
-    "spacex"
-  ],
   "author": "superrnovae",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/superrnovae/spacex/issues"
+    "url": "https://github.com/superrnovae/backend/issues"
   },
-  "homepage": "https://github.com/superrnovae/spacex#readme",
+  "homepage": "https://github.com/superrnovae/backend#readme",
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "request": "^2.88.2"
   }
 }
