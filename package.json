@@ -1,0 +1,22 @@
+{
+  "name": "spacex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superrnovae/spacex.git"
+  },
+  "keywords": [
+    "spacex"
+  ],
+  "author": "superrnovae",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/superrnovae/spacex/issues"
+  },
+  "homepage": "https://github.com/superrnovae/spacex#readme"
+}
