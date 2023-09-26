@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/superrnovae/spacex/issues"
   },
-  "homepage": "https://github.com/superrnovae/spacex#readme"
+  "homepage": "https://github.com/superrnovae/spacex#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
