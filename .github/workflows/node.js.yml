@@ -26,5 +26,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
-    - run: yarn install --immutable
-    - run: CI=true yarn test
+        cache-dependency-path: ./client/yarn.lock
+
+    - name: run yarn commands
+      working-directory: client
+      run: | 
+          yarn && CI=true
+          yarn test
