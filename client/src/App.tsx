@@ -11,6 +11,7 @@ import ErrorMessage from './ErrorMessage';
 import NavBar from './NavBar';
 import Welcome from './Welcome';
 import 'bootstrap/dist/css/bootstrap.css';
+import Calendar from './Calendar';
 
 // <AppPropsSnippet>
 type AppProps = {
@@ -30,6 +31,10 @@ export default function App({ pca }: AppProps): JSX.Element {
               <Route path="/"
                 element={
                   <Welcome />
+                } />
+              <Route path="/calendar"
+                element={
+                  <Calendar />
                 } />
             </Routes>
           </Container>

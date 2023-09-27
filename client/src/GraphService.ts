@@ -2,9 +2,11 @@
 // Licensed under the MIT License.
 
 // <GetUserSnippet
-import { Client } from '@microsoft/microsoft-graph-client';
+import { Client, GraphRequestOptions, PageCollection, PageIterator } from '@microsoft/microsoft-graph-client';
 import { AuthCodeMSALBrowserAuthenticationProvider } from '@microsoft/microsoft-graph-client/authProviders/authCodeMsalBrowser';
-import { User } from '@microsoft/microsoft-graph-types';
+import { User, Event } from '@microsoft/microsoft-graph-types';
+import { endOfWeek, startOfWeek } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 let graphClient: Client | undefined = undefined;
 
@@ -18,6 +20,7 @@ function ensureClient(authProvider: AuthCodeMSALBrowserAuthenticationProvider) {
   return graphClient;
 }
 
+// <GetUserSnippet>
 export async function getUser(authProvider: AuthCodeMSALBrowserAuthenticationProvider): Promise<User> {
   ensureClient(authProvider);
 
@@ -30,3 +33,53 @@ export async function getUser(authProvider: AuthCodeMSALBrowserAuthenticationPro
   return user;
 }
 // </GetUserSnippet>
+
+// <GetUserWeekCalendarSnippet>
+export async function getUserWeekCalendar(authProvider: AuthCodeMSALBrowserAuthenticationProvider,
+  timeZone: string): Promise<Event[]> {
+  ensureClient(authProvider);
+
+  // Generate startDateTime and endDateTime query params
+  // to display a 7-day window
+  const now = new Date();
+  const startDateTime = zonedTimeToUtc(startOfWeek(now), timeZone).toISOString();
+  const endDateTime = zonedTimeToUtc(endOfWeek(now), timeZone).toISOString();
+
+  // GET /me/calendarview?startDateTime=''&endDateTime=''
+  // &$select=subject,organizer,start,end
+  // &$orderby=start/dateTime
+  // &$top=50
+  var response: PageCollection = await graphClient!
+    .api('/me/calendarview')
+    .header('Prefer', `outlook.timezone="${timeZone}"`)
+    .query({ startDateTime: startDateTime, endDateTime: endDateTime })
+    .select('subject,organizer,start,end')
+    .orderby('start/dateTime')
+    .top(25)
+    .get();
+
+  if (response["@odata.nextLink"]) {
+    // Presence of the nextLink property indicates more results are available
+    // Use a page iterator to get all results
+    var events: Event[] = [];
+
+    // Must include the time zone header in page
+    // requests too
+    var options: GraphRequestOptions = {
+      headers: { 'Prefer': `outlook.timezone="${timeZone}"` }
+    };
+
+    var pageIterator = new PageIterator(graphClient!, response, (event) => {
+      events.push(event);
+      return true;
+    }, options);
+
+    await pageIterator.iterate();
+
+    return events;
+  } else {
+
+    return response.value;
+  }
+}
+// </GetUserWeekCalendarSnippet>
