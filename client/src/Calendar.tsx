@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 import { useEffect, useState } from 'react';
-import { NavLink as RouterNavLink } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import { findIana } from 'windows-iana';
 import { Event } from '@microsoft/microsoft-graph-types';

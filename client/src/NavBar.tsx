@@ -45,6 +45,9 @@ export default function NavBar() {
               <NavItem>
                 <RouterNavLink to="/calendar" className="nav-link">Calendar</RouterNavLink>
               </NavItem>
+              <NavItem>
+                <RouterNavLink to="/newevent" className="nav-link">New Event</RouterNavLink>
+              </NavItem>
             </AuthenticatedTemplate>
           </Nav>
           <Nav className="ms-auto align-items-center" navbar>
