@@ -1,0 +1,20 @@
+FROM debian:9
+
+ENV MYSQL_ROOT_PSSWD=vladislavantoine
+
+RUN apt-get update -yq\
+    && apt-get install curl gnupg -yq \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server \
+    && apt-get clean -y
+
+ADD . /app/
+
+WORKDIR /app
+
+RUN npm install
+
+EXPOSE 3306
+
+VOLUME /app/logs
+
+CMD npm run start

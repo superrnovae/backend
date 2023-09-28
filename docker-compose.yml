@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  node-app:
+    build:
+      context: ./Dockerfile-node # Lien vers le Dockerfile Node
+      ports: "2368"
+  mariadb:
+    build:
+      context: ./Dockerfile-mariadb # Lien vers le Dockerfile MariaDB
+    environment:
+      - MYSQL_ROOT_PSSWD=vladislavantoine
+
+ports: "3306"
