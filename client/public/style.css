@@ -2,12 +2,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 20px;
 }
 
 .button1 {
     border: 1px solid #b89a52;
+    padding: 5px 10px;
+    border-radius: 1000px;
+    margin-right: 10px;
 }
 
-button2 {
+.button2 {
+    border: 1px solid #b89a52;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 0px 10px;
+}
 
+.button3 {
+    border: 1px solid #b89a52;
+    background-color: #b89a52;
+    padding: 5px 10px;
+    margin-left: 10px;
 }
